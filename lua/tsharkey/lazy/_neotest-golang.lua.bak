@@ -1,0 +1,64 @@
+-- wasn't able to get this to work, but generally seems like a better
+-- go test adapter, revisit at somepoint
+return {
+    {  "nvim-neotest/neotest",
+        dependencies = {
+            "nvim-neotest/nvim-nio",
+            "nvim-lua/plenary.nvim",
+            "antoinemadec/FixCursorHold.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "fredrikaverpil/neotest-golang",
+        },
+        config = function ()
+            require("neotest").setup({
+                adapters = {
+                    require("neotest-golang"),
+                },
+            })
+        end,
+        -- keys = {
+        --     {
+        --         "<leader>td",
+        --         function()
+        --             require("neotest").run.run({ suite = false, strategy = "dap" })
+        --         end,
+        --         desc = "Debug nearest test",
+        --     },
+        --     {
+        --         "<leader>tt",
+        --         function()
+        --             require('neotest').run.run()
+        --         end,
+        --         desc = "Run the nearest test",
+        --     },
+        --     {
+        --         "<leader>tf",
+        --         function ()
+        --             require('neotest').run.run(vim.fn.expand("%"))
+        --         end,
+        --         desc = "Run the current file's tests",
+        --     },
+        -- },
+    },
+    -- {
+    --     'andythigpen/nvim-coverage',
+    --     config = function ()
+    --         require('coverage').setup({
+    --             commands = true,
+    --             highlights = {
+    --                 covered = { fg = '#C3E88D' },
+    --                 uncovered = { fg = '#F07178' },
+    --             },
+    --             signs = {
+    --                 -- use your own highlight groups or text markers
+    --                 covered = { hl = "CoverageCovered", text = "▎" },
+    --                 uncovered = { hl = "CoverageUncovered", text = "▎" },
+    --             },
+    --             summary = {
+    --                 -- customize the summary pop-up
+    --                 min_coverage = 80.0,      -- minimum coverage threshold (used for highlighting)
+    --             },
+    --         })
+    --     end
+    -- }
+}

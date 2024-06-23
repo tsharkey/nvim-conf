@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = "tsharkey.lazy",
 	change_detection = { notify = false },
-    defaults = { lazy = true },
+    defaults = { lazy = false },
     install = { colorscheme = { "nord" } },
     rtp = {
         disabled_plugins = {

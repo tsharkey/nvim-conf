@@ -19,13 +19,16 @@ return {
             },
             sections = {
                 lualine_a = { "mode" },
-                lualine_b = { "diagnostics", "branch" },
+                lualine_b = { {"diagnostics", sources = { "nvim_lsp" }}, "branch" },
                 lualine_c = { "diff" },
-                lualine_x = { "filename","encoding", "fileformat", "filetype" },
+                lualine_x = { {"filename", path = 1}, "aerial", "fileformat", "filetype" },
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
             },
-            -- sections = {},
+
+            tabline = {
+                lualine_b = { "aerial" }
+            }
         })
     end
 }

@@ -24,4 +24,5 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.mouse:append("a")
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = o
+
