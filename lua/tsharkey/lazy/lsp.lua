@@ -1,18 +1,7 @@
 return {
     -------------------------------
     {"williamboman/mason.nvim"},
-    {
-        "williamboman/mason-lspconfig.nvim",
-        config = function ()
-            require('mason-lspconfig').setup {
-                ensure_installed = {
-                    'lua_ls',
-                    'gopls',
-                    'golangci_lint_ls'
-                },
-            }
-        end
-    },
+    {"williamboman/mason-lspconfig.nvim"},
     {
         'hrsh7th/nvim-cmp',
         dependencies = {
@@ -93,6 +82,13 @@ return {
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
             require('mason').setup()
+            require('mason-lspconfig').setup({
+                ensure_installed = {
+                    'lua_ls',
+                    'gopls',
+                    'golangci_lint_ls'
+                }
+            })
             require('mason-lspconfig').setup_handlers({
                 function (server_name)
                     require('lspconfig')[server_name].setup {
