@@ -18,10 +18,10 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 -- Templ
--- vim.api.nvim_create_augroup("format_templ", { clear = true })
---
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---     pattern = { "*.templ" },
---     callback = vim.lsp.buf.format,
---     group = "format_templ"
--- })
+vim.api.nvim_create_augroup("format_templ", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    pattern = { "*.templ" },
+    command = "silent! !templ fmt %",
+    group = "format_templ"
+})

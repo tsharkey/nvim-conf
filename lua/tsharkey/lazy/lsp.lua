@@ -31,23 +31,23 @@ return {
                         select = true,
                     }),
                     ["<Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
+                        if cmp.visible() then
+                            cmp.select_next_item()
                         elseif luasnip.expand_or_locally_jumpable() then
                             luasnip.expand_or_jump()
                         else
                             fallback()
                         end
-                        end, { "i", "s" }),
+                    end, { "i", "s" }),
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
+                        if cmp.visible() then
+                            cmp.select_prev_item()
                         elseif luasnip.locally_jumpable(-1) then
                             luasnip.jump(-1)
                         else
                             fallback()
                         end
-                        end, { "i", "s" }),
+                    end, { "i", "s" }),
                 }),
                 sources = {
                     { name = "nvim_lsp" },
@@ -84,6 +84,10 @@ return {
                     "lua_ls",
                     "gopls",
                     "golangci_lint_ls",
+                    "templ",
+                    -- "htmx",
+                    "html",
+                    "tailwindcss"
                 },
             })
             require("mason-lspconfig").setup_handlers({
@@ -128,11 +132,21 @@ return {
                 ["templ"] = function()
                     require("lspconfig").templ.setup({
                         filetypes = {"templ"},
-                        cmd = { "templ", "lsp", "-http=localhost:7474"},
+                        cmd = { "templ", "lsp"},
                         root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
-                        settings = {}
+                        -- settings = {}
+                    })
+                end,
+                ["tailwindcss"] = function ()
+                    require("lspconfig").tailwindcss.setup({
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                        filetypes = { "html", "templ" },
+                        root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "tailwind.config.js"),
+                        init_options = { userLanguages = { templ = "html" } },
                     })
                 end
+
             })
         end,
     },
