@@ -1,0 +1,1 @@
+require("tsharkey.autocommand.format")

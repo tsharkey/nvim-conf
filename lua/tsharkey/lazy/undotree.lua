@@ -1,8 +1,8 @@
 return {
-    'mbbill/undotree',
-    lazy = false,
-    config = function ()
-        vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-        vim.g.undotree_SetFocusWhenToggle = 1
-    end
+	"mbbill/undotree",
+	lazy = false,
+	config = function()
+		vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+		vim.g.undotree_SetFocusWhenToggle = 1
+	end,
 }

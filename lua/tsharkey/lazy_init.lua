@@ -15,18 +15,18 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = "tsharkey.lazy",
 	change_detection = { notify = false },
-    defaults = { lazy = false },
-    install = { colorscheme = { "nord" } },
-    rtp = {
-        disabled_plugins = {
-         "gzip",
-         "matchit",
-         "matchparen",
-         "netrwPlugin",
-         "tarPlugin",
-         "tohtml",
-         "tutor",
-         "zipPlugin",
-        },
-    },
+	defaults = { lazy = false },
+	install = { colorscheme = { "nord" } },
+	rtp = {
+		disabled_plugins = {
+			"gzip",
+			"matchit",
+			"matchparen",
+			"netrwPlugin",
+			"tarPlugin",
+			"tohtml",
+			"tutor",
+			"zipPlugin",
+		},
+	},
 })

@@ -8,7 +8,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local c = ls.choice_node
 
 ls.add_snippets("go", {
-    s("ss", {
-        t('simple golang snippet')
-    })
+	s("ss", {
+		t("simple golang snippet"),
+	}),
 })

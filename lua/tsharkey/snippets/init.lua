@@ -1,2 +1,2 @@
-require('tsharkey.snippets.go')
-require('tsharkey.snippets.all')
+require("tsharkey.snippets.go")
+require("tsharkey.snippets.all")
