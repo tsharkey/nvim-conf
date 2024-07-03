@@ -9,13 +9,13 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 -- Golang
-vim.api.nvim_create_augroup("format_go", { clear = true })
-
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = "*.go,go.mod",
-	command = "silent! !goimports -w %",
-    group = "format_go"
-})
+-- vim.api.nvim_create_augroup("format_go", { clear = true })
+--
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+-- 	pattern = "*.go,go.mod",
+-- 	command = "silent! !goimports -w %",
+--     group = "format_go"
+-- })
 
 -- Templ
 vim.api.nvim_create_augroup("format_templ", { clear = true })
