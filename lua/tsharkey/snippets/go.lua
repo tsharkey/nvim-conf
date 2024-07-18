@@ -11,12 +11,6 @@ local sn = ls.snippet_node
 local f = ls.function_node
 
 ls.add_snippets("go", {
-    s("ss", {
-        t("simple golang snippet"),
-    }),
-})
-
-ls.add_snippets("go", {
     s("tests", {
         t({"package "}), i(1),
         t({"", "", "import ("}),

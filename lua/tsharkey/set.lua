@@ -1,5 +1,4 @@
 vim.opt.nu = true
-vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -16,14 +15,18 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.swapfile = false
+vim.opt.swapfile = true
+vim.opt.directory = vim.fn.expand("~/.vim/swap")
 vim.opt.backup = false
 vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
 vim.opt.undofile = true
+
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.mouse:append("a")
+
 vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 vim.opt.autowriteall = true
