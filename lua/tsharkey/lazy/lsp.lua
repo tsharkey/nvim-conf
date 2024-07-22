@@ -136,8 +136,6 @@ return {
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
 				vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr })
-				vim.keymap.set("n", "<leader>td", vim.lsp.buf.type_definition, { buffer = bufnr })
-
 				vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { buffer = bufnr })
 
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
@@ -148,7 +146,7 @@ return {
 			end
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
+			vim.g.ruby_host_prog = "/Users/thomassharkey/.rbenv/versions/2.7.6/bin/ruby"
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -156,9 +154,10 @@ return {
 					"gopls",
 					"golangci_lint_ls",
 					"templ",
-					"htmx",
+					-- "htmx",
 					"html",
 					"tailwindcss",
+					"solargraph@0.48.0",
 				},
 			})
 			require("mason-lspconfig").setup_handlers({
@@ -166,6 +165,31 @@ return {
 					require("lspconfig")[server_name].setup({
 						on_attach = on_attach,
 						capabilities = capabilities,
+					})
+				end,
+				["solargraph"] = function()
+					require("lspconfig").solargraph.setup({
+						on_attach = on_attach,
+						capabilities = capabilities,
+						cmd = { "/Users/thomassharkey/.rbenv/versions/2.7.6/bin/solargraph", "stdio" },
+						root_dir = require("lspconfig").util.root_pattern("Gemfile", ".git", "."),
+						settings = {
+							solargraph = {
+								useBundler = true,
+								bundlerPath = "/Users/thomassharkey/.rbenv/versions/2.7.6/bin/bundle",
+								diagnostics = true,
+								completion = true,
+								hover = true,
+								definitions = true,
+								references = true,
+								documentSymbol = true,
+								workspaceSymbol = true,
+								codeAction = true,
+								codeLens = true,
+								rename = true,
+								formatting = true,
+							},
+						},
 					})
 				end,
 				["lua_ls"] = function()
@@ -177,6 +201,7 @@ return {
 								workspace = { checkThirdParty = false },
 								telemetry = { enable = false },
 								diagnostics = { globals = { "vim" } },
+								hint = { enable = true },
 							},
 						},
 					})
@@ -208,7 +233,7 @@ return {
 				end,
 				["tailwindcss"] = function()
 					require("lspconfig").tailwindcss.setup({
-						on_attach = on_attach,
+						on_attacnh = on_attach,
 						capabilities = capabilities,
 						filetypes = { "html", "templ" },
 						root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "tailwind.config.js"),

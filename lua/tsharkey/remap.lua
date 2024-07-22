@@ -45,3 +45,33 @@ vim.keymap.set("n", "<leader>go", git_browse_current_file, { noremap = true, sil
 vim.keymap.set("n", "<leader>jj", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle inlay hints" })
+
+-- Function to toggle the matching notes file
+function toggle_matching_notes()
+	-- Get the current file name
+	local current_file = vim.fn.expand("%:t")
+
+	-- Generate the matching notes file name
+	local notes_file = vim.fn.expand("%:t:r") .. ".notes.md"
+
+	-- Check if the notes file is already open in a window
+	local notes_win = vim.fn.bufwinnr(notes_file)
+
+	if notes_win ~= -1 then
+		-- If the notes file is open, close its window
+		vim.cmd(notes_win .. "wincmd c")
+	else
+		-- If the notes file is not open, open it
+		if vim.fn.filereadable(notes_file) == 1 then
+			-- Open the existing notes file in a vertical split
+			vim.cmd("vsplit " .. notes_file)
+		else
+			-- If the file doesn't exist, create it and open in a vertical split
+			vim.cmd("vsplit " .. notes_file)
+			vim.cmd("write")
+		end
+	end
+end
+
+-- Map the function to <leader>no in normal mode
+vim.api.nvim_set_keymap("n", "<leader>no", ":lua toggle_matching_notes()<CR>", { noremap = true, silent = true })
