@@ -8,20 +8,24 @@ return {
 				"vimdoc",
 				"javascript",
 				"typescript",
-				"c",
 				"lua",
-				"rust",
-				"jsdoc",
 				"bash",
 				"go",
 				"sql",
 				"ruby",
-				"python",
 				"svelte",
 				"json",
 				"dockerfile",
 				"yaml",
 				"graphql",
+				"html",
+				"css",
+				"templ",
+				"terraform",
+			},
+
+			matchup = {
+				enable = true,
 			},
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)

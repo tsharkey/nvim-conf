@@ -19,10 +19,23 @@ return {
 		end,
 	},
 	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+		},
+		config = function()
+			local luasnip = require("luasnip")
+			luasnip.config.set_config({
+				history = true,
+				updateevents = "TextChanged,TextChangedI",
+			})
+			require("luasnip/loaders/from_vscode").lazy_load()
+		end,
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"windwp/nvim-autopairs",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
@@ -33,6 +46,7 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			require("tsharkey.snippets.go")
+			require("tsharkey.snippets.templ")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			luasnip.config.setup({})
 
@@ -89,46 +103,6 @@ return {
 			inlay_hints = { enabled = true },
 		},
 		config = function()
-			require("lspconfig").gopls.setup({
-				settings = {
-					gopls = {
-						gofumpt = true,
-						codelenses = {
-							gc_details = false,
-							generate = true,
-							regenerate_cgo = true,
-							run_govulncheck = true,
-							test = true,
-							tidy = true,
-							upgrade_dependency = true,
-							vendor = true,
-						},
-						hints = {
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							constantValues = true,
-							functionTypeParameters = true,
-							parameterNames = true,
-							rangeVariableTypes = true,
-						},
-						analyses = {
-							fieldalignment = true,
-							nilness = true,
-							unusedparams = true,
-							unusedwrite = true,
-							useany = true,
-							fillstruct = true,
-						},
-						usePlaceholders = true,
-						completeUnimported = true,
-						staticcheck = true,
-						directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-						semanticTokens = true,
-					},
-				},
-			})
-
 			local on_attach = function(_, bufnr)
 				vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { buffer = bufnr })
 				vim.keymap.set("n", "<leader>cc", vim.lsp.buf.code_action, { buffer = bufnr })
@@ -167,6 +141,50 @@ return {
 						capabilities = capabilities,
 					})
 				end,
+				["gopls"] = function()
+					require("lspconfig").gopls.setup({
+						on_attach = on_attach,
+						capabilities = capabilities,
+						root_dir = require("lspconfig").util.root_pattern("go.mod", ".git"),
+						settings = {
+							gopls = {
+								gofumpt = true,
+								codelenses = {
+									gc_details = false,
+									generate = true,
+									regenerate_cgo = true,
+									run_govulncheck = true,
+									test = true,
+									tidy = true,
+									upgrade_dependency = true,
+									vendor = true,
+								},
+								hints = {
+									assignVariableTypes = true,
+									compositeLiteralFields = true,
+									compositeLiteralTypes = true,
+									constantValues = true,
+									functionTypeParameters = true,
+									parameterNames = true,
+									rangeVariableTypes = true,
+								},
+								analyses = {
+									fieldalignment = true,
+									nilness = true,
+									unusedparams = true,
+									unusedwrite = true,
+									useany = true,
+									fillstruct = true,
+								},
+								usePlaceholders = true,
+								completeUnimported = true,
+								staticcheck = true,
+								directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+								semanticTokens = true,
+							},
+						},
+					})
+				end,
 				["solargraph"] = function()
 					require("lspconfig").solargraph.setup({
 						on_attach = on_attach,
@@ -185,6 +203,7 @@ return {
 								documentSymbol = true,
 								workspaceSymbol = true,
 								codeAction = true,
+								signature_help = true,
 								codeLens = true,
 								rename = true,
 								formatting = true,
