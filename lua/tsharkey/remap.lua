@@ -65,10 +65,10 @@ end
 -- Function to open and prepare the matching notes file
 function open_matching_notes()
 	-- Get the current file name
-	local current_file = vim.fn.expand("%:t")
+	local current_file = vim.fn.expand("%")
 
 	-- Generate the matching notes file name
-	local notes_file = vim.fn.expand("%:t:r") .. ".notes.md"
+	local notes_file = vim.fn.expand("%:r") .. ".notes.md"
 
 	-- Check if the notes file is already open in a window
 	local notes_win = vim.fn.bufwinnr(notes_file)
