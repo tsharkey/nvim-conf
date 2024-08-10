@@ -12,11 +12,12 @@ return {
 				ruby = { "rufo" },
 				terraform = { "terraform_fmt" },
 			},
+      format_on_save = {
+        enabled = true,
+        timeout_ms = 500,
+        lsp_format = "fallback"
+      }
 		})
 	end,
-	format_on_save = {
-		enabled = true,
-		timeout_ms = 500,
-	},
 	opts = {},
 }
