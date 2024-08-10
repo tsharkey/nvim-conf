@@ -8,6 +8,13 @@ return {
 	config = function()
 		require("telescope").setup({
 			pickers = {
+				buffers = {
+					mappings = {
+						i = {
+							["<c-d>"] = "delete_buffer",
+						},
+					},
+				},
 				find_files = {
 					hidden = true,
 					file_ignore_patterns = { ".git" },
