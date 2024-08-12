@@ -37,8 +37,9 @@ function notes.open_matching_notes()
 		visual_selection = region_to_text(vim.region(0, "v", ".", vim.fn.visualmode(), true))
 	end
 
+	-- if the notes window is already open focus to that window
 	if notes_win ~= -1 then
-		vim.cmd(notes_win .. "wincmd c")
+		vim.cmd(notes_win .. "wincmd w")
 	else
 		if vim.fn.filereadable(notes_file) == 1 then
 			vim.cmd("vsplit " .. notes_file)

@@ -7,7 +7,18 @@ return {
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"luckasRanarison/tailwind-tools.nvim",
+		"onsails/lspkind-nvim",
 	},
+	opts = function()
+		return {
+			formatting = {
+				format = require("lspkind").cmp_format({
+					before = require("tailwind-tools.cmp").lspkind_format,
+				}),
+			},
+		}
+	end,
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
@@ -56,6 +67,7 @@ return {
 				{ name = "nvim_lsp_signature_help" },
 				{ name = "buffer" },
 			},
+			cmp.setup.filetype("minifiles", { sources = cmp.config.sources({}, {}) }),
 		})
 
 		-- Integrate nvim-autopairs with nvim-cmp

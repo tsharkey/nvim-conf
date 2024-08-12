@@ -4,6 +4,7 @@ return {
 		require("mini.files").setup({
 			mappings = {
 				go_in_plus = "<CR>",
+				close = "<ESC>",
 			},
 		})
 		vim.keymap.set("n", "<leader>EE", "<cmd>lua MiniFiles.open()<CR>")
