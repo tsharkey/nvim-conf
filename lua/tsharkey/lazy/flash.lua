@@ -2,6 +2,11 @@ return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
 	opts = {},
+	config = function()
+		require("flash").setup({
+			scope = "buf",
+		})
+	end,
 	keys = {
 		{
 			"s",

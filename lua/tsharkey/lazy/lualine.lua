@@ -19,7 +19,7 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { { "diagnostics", sources = { "nvim_lsp" } }, "branch" },
+				lualine_b = { { "diagnostics", sources = { "nvim_workspace_diagnostic" } }, "branch" },
 				lualine_c = { "diff" },
 				lualine_x = { "fileformat", "filetype" },
 				lualine_y = { "progress" },

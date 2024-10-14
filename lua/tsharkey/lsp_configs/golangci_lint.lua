@@ -11,8 +11,6 @@ function M.mason_setup(on_attach, capabilities)
 				command = {
 					"golangci-lint",
 					"run",
-					"--disable",
-					"lll",
 					"--out-format",
 					"json",
 					"--issues-exit-code=1",

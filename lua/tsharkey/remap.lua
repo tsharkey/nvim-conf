@@ -20,7 +20,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- old habits die hard
-vim.keymap.set("n", "<C-a>", "ggVG")
+vim.keymap.set({ "n", "v" }, "<C-a>", "0")
+vim.keymap.set({ "n", "v" }, "<C-e>", "$")
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 
 vim.keymap.set(
@@ -30,7 +31,9 @@ vim.keymap.set(
 	{ noremap = true, silent = true }
 )
 
-vim.keymap.set("n", "<leader>gtb", "<cmd>!gh browse<cr>")
+vim.keymap.set("n", "<leader>gtb", function()
+	vim.fn.system("gh browse")
+end, { noremap = true, silent = true })
 
 vim.keymap.set(
 	{ "n", "v" },

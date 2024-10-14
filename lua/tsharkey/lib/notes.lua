@@ -15,7 +15,7 @@ local function get_current_date()
 	return os.date("%Y-%m-%d")
 end
 
-function region_to_text(region)
+local function region_to_text(region)
 	local text = ""
 	local maxcol = vim.v.maxcol
 	for line, cols in vim.spairs(region) do

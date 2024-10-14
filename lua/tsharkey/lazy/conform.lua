@@ -4,7 +4,7 @@ return {
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				go = { "goimports", "gofmt" },
+				go = { "goimports" },
 				sql = { "pg_format" },
 				yaml = { "yamlfix" },
 				graphql = { "prettier" },
@@ -12,11 +12,6 @@ return {
 				ruby = { "rufo" },
 				terraform = { "terraform_fmt" },
 			},
-			-- format_on_save = {
-			-- 	enabled = true,
-			-- 	timeout_ms = 500,
-			-- 	lsp_format = "fallback",
-			-- },
 		})
 	end,
 	opts = {},
