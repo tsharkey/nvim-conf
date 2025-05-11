@@ -18,5 +18,10 @@ return {
 			"<cmd>Trouble symbols toggle focus=false<cr>",
 			desc = "Symbols (Trouble)",
 		},
-	},
+    {
+			"<leader>xe",
+			"<cmd>Trouble diagnostics filter.severity=vim.diagnostic.severity.ERROR<cr>",
+			desc = "Trouble errors only",
+		}
+	}
 }

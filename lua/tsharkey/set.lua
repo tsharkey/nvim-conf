@@ -32,3 +32,4 @@ vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 vim.opt.autowriteall = true
 vim.opt.autoread = true
+

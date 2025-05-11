@@ -38,3 +38,6 @@ vim.keymap.set(
 	"<cmd>lua require('tsharkey.lib.notes').open_matching_notes()<cr>",
 	{ noremap = true, silent = true }
 )
+
+vim.keymap.set("n", "<leader>ss", "<cmd>Telescope grep_string<cr>")
+vim.keymap.set("n", "<leader>jj", "<cmd>AvanteAsk<CR>")

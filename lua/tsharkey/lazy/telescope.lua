@@ -37,5 +37,6 @@ return {
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 		require("telescope").load_extension("live_grep_args")
 		vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+    vim.keymap.set("n", "<leader>mm", ":Telescope lsp_document_symbols<CR>")
 	end,
 }

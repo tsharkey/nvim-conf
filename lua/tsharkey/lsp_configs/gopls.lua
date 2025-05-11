@@ -43,6 +43,7 @@ function M.mason_setup(on_attach, capabilities)
 		local lspconfig = require("lspconfig")
 		lspconfig.gopls.setup({
 			on_attach = on_attach,
+      filetypes = {"go"},
 			capabilities = capabilities,
 			root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
 			settings = M.gopls_config,

@@ -31,7 +31,38 @@ return {
 					dynamicRegistration = true,
 				},
 			}
-
+			local solargraph_cmd = "/Users/thomassharkey/.rbenv/shims/solargraph"
+      local lspconfig = require("lspconfig")
+			local root_dir = lspconfig.util.root_pattern("Gemfile", ".git", ".")
+			lspconfig.solargraph.setup({
+				on_attach = function(client, bufnr)
+					on_attach(client, bufnr)
+				end,
+				capabilities = capabilities,
+				cmd = { solargraph_cmd, "stdio" },
+				root_dir = root_dir,
+				settings = {
+					solargraph = {
+            useBundler = true,
+            bundlerPath = "/Users/thomassharkey/.rbenv/shims/bundler",
+            diagnostics = true,
+            completion = true,
+            hover = true,
+            definitions = true,
+            references = true,
+            documentSymbol = true,
+            workspaceSymbol = true,
+            codeAction = true,
+            signature_help = true,
+            codeLens = true,
+            rename = true,
+            formatting = true,
+					}
+				},
+				flags = {
+					debounce_text_changes = 150,
+				},
+			})
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -42,26 +73,24 @@ return {
 					-- "htmx", this just fails to download
 					"html",
 					"tailwindcss",
-					"solargraph@0.48.0",
 				},
-			})
-			require("mason-lspconfig").setup_handlers({
-				function(server_name)
-					require("lspconfig")[server_name].setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-					})
-				end,
-				["html"] = require("tsharkey.lsp_configs.html").mason_setup(on_attach, capabilities),
-				["gopls"] = require("tsharkey.lsp_configs.gopls").mason_setup(on_attach, capabilities),
-				["solargraph"] = require("tsharkey.lsp_configs.solargraph").mason_setup(on_attach, capabilities),
-				["lua_ls"] = require("tsharkey.lsp_configs.luals").mason_setup(on_attach, capabilities),
-				["golangci_lint_ls"] = require("tsharkey.lsp_configs.golangci_lint").mason_setup(
-					on_attach,
-					capabilities
-				),
-				["templ"] = require("tsharkey.lsp_configs.templ").mason_setup(on_attach, capabilities),
-				["tailwindcss"] = require("tsharkey.lsp_configs.tailwindcss").mason_setup(on_attach, capabilities),
+        handlers = {
+          function(server_name)
+          	require("lspconfig")[server_name].setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+            })
+          end,
+          ["html"] = require("tsharkey.lsp_configs.html").mason_setup(on_attach, capabilities),
+          ["gopls"] = require("tsharkey.lsp_configs.gopls").mason_setup(on_attach, capabilities),
+          ["lua_ls"] = require("tsharkey.lsp_configs.luals").mason_setup(on_attach, capabilities),
+          ["golangci_lint_ls"] = require("tsharkey.lsp_configs.golangci_lint").mason_setup(
+            on_attach,
+            capabilities
+          ),
+          ["templ"] = require("tsharkey.lsp_configs.templ").mason_setup(on_attach, capabilities),
+          ["tailwindcss"] = require("tsharkey.lsp_configs.tailwindcss").mason_setup(on_attach, capabilities),
+        }
 			})
 		end,
 	},
