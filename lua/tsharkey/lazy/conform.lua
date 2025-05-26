@@ -13,6 +13,8 @@ return {
         javascript = { "eslint_d", "prettierd" },
         javascriptreact = { "eslint_d", "prettierd" },
         typescriptreact = { "eslint_d", "prettierd" },
+        terraform = { "terraform_fmt" },
+        xml = { "xmlstarlet" },
 			},
 		})
 	end,

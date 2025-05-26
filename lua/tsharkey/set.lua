@@ -33,3 +33,4 @@ vim.opt.cursorline = true
 vim.opt.autowriteall = true
 vim.opt.autoread = true
 
+vim.diagnostic.config({ virtual_text = { current_line = true }})

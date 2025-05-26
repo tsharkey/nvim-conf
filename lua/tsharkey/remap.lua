@@ -30,14 +30,4 @@ vim.keymap.set(
 	{ noremap = true, silent = true }
 )
 
-vim.keymap.set("n", "<leader>gtb", "<cmd>!gh browse<cr>")
-
-vim.keymap.set(
-	{ "n", "v" },
-	"<leader>no",
-	"<cmd>lua require('tsharkey.lib.notes').open_matching_notes()<cr>",
-	{ noremap = true, silent = true }
-)
-
 vim.keymap.set("n", "<leader>ss", "<cmd>Telescope grep_string<cr>")
-vim.keymap.set("n", "<leader>jj", "<cmd>AvanteAsk<CR>")
