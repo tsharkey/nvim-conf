@@ -1,6 +1,18 @@
 return {
-	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
+  { 
+    "mason-org/mason.nvim",
+    config = function()
+      require("mason").setup({
+          ui = {
+              icons = {
+                  package_installed = "✓",
+                  package_pending = "➜",
+                  package_uninstalled = "✗"
+              }
+          }
+      })
+    end
+  },
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
@@ -31,67 +43,20 @@ return {
 					dynamicRegistration = true,
 				},
 			}
-			local solargraph_cmd = "/Users/thomassharkey/.rbenv/shims/solargraph"
-      local lspconfig = require("lspconfig")
-			local root_dir = lspconfig.util.root_pattern("Gemfile", ".git", ".")
-			lspconfig.solargraph.setup({
-				on_attach = function(client, bufnr)
-					on_attach(client, bufnr)
-				end,
-				capabilities = capabilities,
-				cmd = { solargraph_cmd, "stdio" },
-				root_dir = root_dir,
-				settings = {
-					solargraph = {
-            useBundler = true,
-            bundlerPath = "/Users/thomassharkey/.rbenv/shims/bundler",
-            diagnostics = true,
-            completion = true,
-            hover = true,
-            definitions = true,
-            references = true,
-            documentSymbol = true,
-            workspaceSymbol = true,
-            codeAction = true,
-            signature_help = true,
-            codeLens = true,
-            rename = true,
-            formatting = true,
-					}
-				},
-				flags = {
-					debounce_text_changes = 150,
-				},
-			})
-			require("mason").setup()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"gopls",
-					"golangci_lint_ls",
-					"templ",
-					-- "htmx", this just fails to download
-					"html",
-					"tailwindcss",
-				},
-        handlers = {
-          function(server_name)
-          	require("lspconfig")[server_name].setup({
-              on_attach = on_attach,
-              capabilities = capabilities,
-            })
-          end,
-          ["html"] = require("tsharkey.lsp_configs.html").mason_setup(on_attach, capabilities),
-          ["gopls"] = require("tsharkey.lsp_configs.gopls").mason_setup(on_attach, capabilities),
-          ["lua_ls"] = require("tsharkey.lsp_configs.luals").mason_setup(on_attach, capabilities),
-          ["golangci_lint_ls"] = require("tsharkey.lsp_configs.golangci_lint").mason_setup(
-            on_attach,
-            capabilities
-          ),
-          ["templ"] = require("tsharkey.lsp_configs.templ").mason_setup(on_attach, capabilities),
-          ["tailwindcss"] = require("tsharkey.lsp_configs.tailwindcss").mason_setup(on_attach, capabilities),
-        }
-			})
+
+      local lspconfig = require('lspconfig')
+      lspconfig.graphql.setup({
+        filetypes = { "graphql", "gql", "graphqls", "typescript", "javascript" },
+        root_dir = lspconfig.util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*', 'gqlgen.yml'),
+      })
+
+      require("tsharkey.lsp_configs.luals").setup(on_attach, capabilities)
+      require("tsharkey.lsp_configs.solargraph").setup(on_attach, capabilities)
+      require("tsharkey.lsp_configs.golangci_lint").setup(on_attach, capabilities)
+      require("tsharkey.lsp_configs.gopls").setup(on_attach, capabilities)
+      require("tsharkey.lsp_configs.html").setup(on_attach, capabilities)
+      require("tsharkey.lsp_configs.tailwindcss").setup(on_attach, capabilities)
+      require("tsharkey.lsp_configs.templ").setup(on_attach, capabilities)
 		end,
 	},
 }

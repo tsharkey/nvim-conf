@@ -24,19 +24,17 @@ M.tailwind_config = {
 	validate = true,
 }
 
-function M.mason_setup(on_attach, capabilities)
-	return function()
-		local lspconfig = require("lspconfig")
-		lspconfig.tailwindcss.setup({
-			on_attach = on_attach,
-			filetypes = { "html", "templ" },
-			root_dir = lspconfig.util.root_pattern(".git", "go.mod", "tailwind.config.js"),
-			capabilities = capabilities,
-			settings = {
-				tailwindCSS = M.tailwind_config,
-			},
-		})
-	end
+function M.setup(on_attach, capabilities)
+  local lspconfig = require("lspconfig")
+  lspconfig.tailwindcss.setup({
+    on_attach = on_attach,
+    filetypes = { "html", "templ" },
+    root_dir = lspconfig.util.root_pattern(".git", "go.mod", "tailwind.config.js"),
+    capabilities = capabilities,
+    settings = {
+      tailwindCSS = M.tailwind_config,
+    },
+  })
 end
 
 return M
