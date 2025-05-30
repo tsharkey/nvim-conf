@@ -4,14 +4,19 @@ return {
 	lazy = false,
 	version = "*",
 	opts = {
-		provider = "claude",
-		claude = {
-			endpoint = "https://api.anthropic.com",
-			model = "claude-3-7-sonnet-20250219",
-			timeout = 30000,
-			temperature = 0,
-			max_tokens = 4096,
-		},
+  provider = "gemini", -- Recommend using Claude
+  behaviour = {
+    auto_suggestions = false, -- Experimental stage
+    auto_set_highlight_group = true,
+    auto_set_keymaps = true,
+    auto_apply_diff_after_generation = false,
+    support_paste_from_clipboard = false,
+  },
+  gemini = {
+    model = "gemini-2.5-flash-preview-05-20",
+    temperature = 0,
+    max_tokens = 4096,
+  },
 	},
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
