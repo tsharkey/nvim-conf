@@ -18,9 +18,39 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("FixTerraformCommentString", { clear = true }),
-  callback = function(ev)
-    vim.bo[ev.buf].commentstring = "# %s"
-  end,
-  pattern = { "terraform", "hcl" },
+	group = vim.api.nvim_create_augroup("FixTerraformCommentString", { clear = true }),
+	callback = function(ev)
+		vim.bo[ev.buf].commentstring = "# %s"
+	end,
+	pattern = { "terraform", "hcl" },
 })
+
+--- Show diagnostics in floating window on cursor hold
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		local opts = {
+			focusable = false,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			border = "rounded",
+			source = "always",
+			prefix = " ",
+		}
+		vim.diagnostic.open_float(nil, opts)
+	end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		local opts = {
+			focusable = false,
+			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+			border = "rounded",
+			source = "always",
+			prefix = " ",
+		}
+		vim.diagnostic.open_float(nil, opts)
+	end,
+})
+
+-- Reduce the delay before CursorHold triggers (default is 4000ms)
+vim.opt.updatetime = 200

@@ -1,12 +1,12 @@
 return {
-	-- {
-	-- 	"EdenEast/nightfox.nvim",
-	-- 	config = function()
-	-- 		-- vim.cmd("colorscheme nordfox")
-	-- 		-- vim.cmd("colorscheme nightfox")
-	-- 		vim.cmd("colorscheme terafox")
-	-- 	end,
-	-- },
+	{
+		"EdenEast/nightfox.nvim",
+		config = function()
+			-- vim.cmd("colorscheme nordfox")
+			-- vim.cmd("colorscheme nightfox")
+			vim.cmd("colorscheme terafox")
+		end,
+	},
 	-- {
 	-- 	"rjshkhr/shadow.nvim",
 	-- 	priority = 1000,
@@ -15,14 +15,14 @@ return {
 	-- 		vim.cmd.colorscheme("shadow")
 	-- 	end,
 	-- },
-	{
-		"cocopon/iceberg.vim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			vim.cmd("colorscheme iceberg")
-		end,
-	},
+	-- {
+	-- 	"cocopon/iceberg.vim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme iceberg")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"AlexvZyl/nordic.nvim",
 	-- 	lazy = false,

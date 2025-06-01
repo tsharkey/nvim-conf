@@ -1,6 +1,3 @@
--- only vim specific keybinds are in here
--- plugin keybinds are in their respective config blocks
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
