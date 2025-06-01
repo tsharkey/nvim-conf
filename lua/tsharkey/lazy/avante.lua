@@ -3,21 +3,35 @@ return {
 	event = "VeryLazy",
 	lazy = false,
 	version = "*",
-	opts = {
-  provider = "gemini", -- Recommend using Claude
-  behaviour = {
-    auto_suggestions = false, -- Experimental stage
-    auto_set_highlight_group = true,
-    auto_set_keymaps = true,
-    auto_apply_diff_after_generation = false,
-    support_paste_from_clipboard = false,
-  },
-  gemini = {
-    model = "gemini-2.5-flash-preview-05-20",
-    temperature = 0,
-    max_tokens = 4096,
-  },
-	},
+	opts = function()
+		-- Simple function to determine provider
+		local function get_provider()
+			return os.getenv("ANTHROPIC_API_KEY") and "claude" or "gemini"
+		end
+
+		local provider = get_provider()
+
+		return {
+			provider = provider,
+			behaviour = {
+				auto_suggestions = false,
+				auto_set_highlight_group = true,
+				auto_set_keymaps = true,
+				auto_apply_diff_after_generation = false,
+				support_paste_from_clipboard = false,
+			},
+			claude = {
+				model = "claude-3-5-sonnet-20241022",
+				temperature = 0,
+				max_tokens = 4096,
+			},
+			gemini = {
+				model = "gemini-2.5-flash-preview-05-20",
+				temperature = 0,
+				max_tokens = 4096,
+			},
+		}
+	end,
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
 	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
