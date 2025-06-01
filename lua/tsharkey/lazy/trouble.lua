@@ -1,27 +1,36 @@
 return {
 	"folke/trouble.nvim",
-	opts = {}, -- for default options, refer to the configuration section for custom setup.
+	opts = {
+  modes = {
+    mydiags = {
+      mode = "diagnostics", -- inherit from diagnostics mode
+      preview = {
+        type = "split",
+        relative = "win",
+        position = "right",
+        size = 0.3,
+      },
+      filter = {
+        any = {
+          buf = 0, -- current buffer
+          {
+            severity = vim.diagnostic.severity.ERROR, -- errors only
+            -- limit to files in the current project
+            function(item)
+              return item.filename:find((vim.loop or vim.uv).cwd(), 1, true)
+            end,
+          },
+        },
+      },
+    }
+  }
+},
 	cmd = "Trouble",
 	keys = {
-		{
+    {
 			"<leader>xx",
-			"<cmd>Trouble diagnostics toggle focus=true<cr>",
+			"<cmd>Trouble mydiags toggle focus=true<cr>",
 			desc = "Diagnostics (Trouble)",
 		},
-		{
-			"<leader>xX",
-			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Buffer Diagnostics (Trouble)",
-		},
-		{
-			"<leader>cs",
-			"<cmd>Trouble symbols toggle focus=false<cr>",
-			desc = "Symbols (Trouble)",
-		},
-    {
-			"<leader>xe",
-			"<cmd>Trouble diagnostics filter.severity=vim.diagnostic.severity.ERROR<cr>",
-			desc = "Trouble errors only",
-		}
-	}
+  }
 }

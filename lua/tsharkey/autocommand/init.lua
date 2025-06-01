@@ -24,3 +24,20 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   pattern = { "terraform", "hcl" },
 })
+
+-- Show diagnostics in floating window on cursor hold
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
+
+-- Reduce the delay before CursorHold triggers (default is 4000ms)
+vim.opt.updatetime = 800
