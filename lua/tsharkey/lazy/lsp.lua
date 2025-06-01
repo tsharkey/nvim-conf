@@ -1,18 +1,47 @@
 return {
-  { 
-    "mason-org/mason.nvim",
-    config = function()
-      require("mason").setup({
-          ui = {
-              icons = {
-                  package_installed = "✓",
-                  package_pending = "➜",
-                  package_uninstalled = "✗"
-              }
-          }
-      })
-    end
-  },
+	{
+		"mason-org/mason.nvim",
+		config = function()
+			require("mason").setup({
+				ui = {
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+			})
+		end,
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
+		opts = {},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"astro-language-server",
+					"bash-language-server",
+					"eslint-lsp",
+					"gopls",
+					"html-lsp",
+					"jq",
+					"jsonlint",
+					"lua-language-server",
+					"prettier",
+					"shellcheck",
+					"stylua",
+					"tailwindcss-language-server",
+					"terraform",
+					"terraform-ls",
+					"typescript-language-server",
+				},
+			})
+		end,
+	},
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
@@ -44,19 +73,35 @@ return {
 				},
 			}
 
-      local lspconfig = require('lspconfig')
-      lspconfig.graphql.setup({
-        filetypes = { "graphql", "gql", "graphqls", "typescript", "javascript" },
-        root_dir = lspconfig.util.root_pattern('.graphqlrc*', '.graphql.config.*', 'graphql.config.*', 'gqlgen.yml'),
-      })
+			vim.lsp.config("*", {
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
 
-      require("tsharkey.lsp_configs.luals").setup(on_attach, capabilities)
-      require("tsharkey.lsp_configs.solargraph").setup(on_attach, capabilities)
-      require("tsharkey.lsp_configs.golangci_lint").setup(on_attach, capabilities)
-      require("tsharkey.lsp_configs.gopls").setup(on_attach, capabilities)
-      require("tsharkey.lsp_configs.html").setup(on_attach, capabilities)
-      require("tsharkey.lsp_configs.tailwindcss").setup(on_attach, capabilities)
-      require("tsharkey.lsp_configs.templ").setup(on_attach, capabilities)
+			vim.lsp.enable({
+				"lua_ls",
+				"astro",
+				"tailwindcss",
+				"bashls",
+				"html",
+				"gopls",
+				"ts_ls",
+				"eslint",
+				"terraformls",
+			})
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = {
+								"vim",
+								"require",
+							},
+						},
+					},
+				},
+			})
 		end,
 	},
 }
