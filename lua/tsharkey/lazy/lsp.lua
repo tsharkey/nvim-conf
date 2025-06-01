@@ -23,21 +23,14 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"astro-language-server",
-					"bash-language-server",
-					"eslint-lsp",
+					"astro",
+					"bashls",
 					"gopls",
-					"html-lsp",
-					"jq",
-					"jsonlint",
-					"lua-language-server",
-					"prettier",
-					"shellcheck",
-					"stylua",
-					"tailwindcss-language-server",
-					"terraform",
-					"terraform-ls",
-					"typescript-language-server",
+					"html",
+					"lua_ls",
+					"tailwindcss",
+					"terraformls",
+					"ts_ls",
 				},
 			})
 		end,
@@ -86,7 +79,6 @@ return {
 				"html",
 				"gopls",
 				"ts_ls",
-				"eslint",
 				"terraformls",
 			})
 
