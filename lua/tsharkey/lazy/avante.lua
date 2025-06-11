@@ -12,23 +12,29 @@ return {
 		local provider = get_provider()
 
 		return {
-			provider = provider,
+			-- provider = provider,
+			providers = {
+				claude = {
+					model = "claude-sonnet-4-20250514",
+					extra_request_body = {
+						temperature = 0,
+						max_tokens = 4096,
+					},
+				},
+				gemini = {
+					model = "gemini-2.5-flash-preview-05-20",
+					extra_request_body = {
+						temperature = 0,
+						max_tokens = 4096,
+					},
+				},
+			},
 			behaviour = {
 				auto_suggestions = false,
 				auto_set_highlight_group = true,
 				auto_set_keymaps = true,
 				auto_apply_diff_after_generation = false,
 				support_paste_from_clipboard = false,
-			},
-			claude = {
-				model = "claude-sonnet-4-20250514",
-				temperature = 0,
-				max_tokens = 4096,
-			},
-			gemini = {
-				model = "gemini-2.5-flash-preview-05-20",
-				temperature = 0,
-				max_tokens = 4096,
 			},
 		}
 	end,
