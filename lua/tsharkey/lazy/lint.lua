@@ -8,13 +8,14 @@ return {
 			typescript = { "eslint" },
 		}
 		local golangcilint = require("lint.linters.golangcilint")
-		golangcilint.append_fname = true
+		golangcilint.append_fname = true -- This is often default
 		golangcilint.args = {
 			"run",
-			"--output.json.path",
-			"stdout",
+			"--out-format",
+			"json", -- Changed this line
 			"--issues-exit-code=0",
-			"--show-stats=false",
+			"--show-stats=false", -- This flag is fine
+			-- Potentially add other golangci-lint flags you need here
 		}
 	end,
 }
