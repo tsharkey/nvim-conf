@@ -27,6 +27,13 @@ vim.keymap.set(
 	{ noremap = true, silent = true }
 )
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- scroll horizontally
+-- vim.keymap.set("n", "ll", "zL")
+-- vim.keymap.set("n", "rr", "zH")
+
 vim.keymap.set("n", "<leader>ss", "<cmd>Telescope grep_string<cr>")
 
 -- Window navigation

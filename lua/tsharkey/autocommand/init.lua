@@ -61,3 +61,11 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 -- Reduce the delay before CursorHold triggers (default is 4000ms)
 vim.opt.updatetime = 200
+
+vim.api.nvim_create_autocmd({
+	-- 'TermOpen',
+	"WinEnter",
+}, { pattern = "term://*", command = "startinsert" })
+vim.api.nvim_create_autocmd({ "BufLeave" }, { pattern = "term://*", command = "stopinsert" })
+-- TODO Need to find a better combo as this delays Esc key presses.
+vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true })

@@ -31,6 +31,7 @@ return {
 					"tailwindcss",
 					"terraformls",
 					"ts_ls",
+					"ruff",
 				},
 			})
 		end,
@@ -49,7 +50,7 @@ return {
 
 				vim.keymap.set("n", "gd", ts_builtin.lsp_definitions, { buffer = bufnr })
 				vim.keymap.set("n", "gm", ts_builtin.lsp_implementations, { buffer = bufnr })
-				vim.keymap.set("n", "gr", ts_builtin.lsp_references, { buffer = bufnr })
+				vim.keymap.set("n", "gf", ts_builtin.lsp_references, { buffer = bufnr })
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
 				vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr })
 
@@ -80,6 +81,22 @@ return {
 				"gopls",
 				"ts_ls",
 				"terraformls",
+				"basedpyright",
+				"ruff",
+				"solargraph",
+			})
+
+			vim.lsp.config("basedpyright", {
+				settings = {
+					python = {
+						pythonPath = vim.fn.getcwd() .. "/.venv/bin/python",
+						analysis = {
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+							typeCheckingMode = "basic",
+						},
+					},
+				},
 			})
 
 			vim.lsp.config("lua_ls", {
@@ -91,6 +108,27 @@ return {
 								"require",
 							},
 						},
+					},
+				},
+			})
+
+			vim.lsp.config("solargraph", {
+				settings = {
+					solargraph = {
+						useBundler = true,
+						bundlerPath = "/Users/thomassharkey/.rbenv/versions/2.7.6/bin/bundle",
+						diagnostics = true,
+						completion = true,
+						hover = true,
+						definitions = true,
+						references = true,
+						documentSymbol = true,
+						workspaceSymbol = true,
+						codeAction = true,
+						signature_help = true,
+						codeLens = true,
+						rename = true,
+						formatting = true,
 					},
 				},
 			})

@@ -8,6 +8,6 @@ return {
 		vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<cr>")
 		vim.keymap.set("n", "<leader>gj", "<cmd>Gitsigns next_hunk<cr>")
 		vim.keymap.set("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<cr>")
-		vim.keymap.set("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>")
+		vim.keymap.set("n", "<leader>gx", "<cmd>Gitsigns reset_hunk<cr>")
 	end,
 }

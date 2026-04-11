@@ -7,6 +7,7 @@ return {
 			go = { "golangcilint" },
 			javascript = { "eslint" },
 			typescript = { "eslint" },
+			graphql = { "eslint_d" },
 		}
 	end,
 }

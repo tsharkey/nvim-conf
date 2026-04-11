@@ -18,6 +18,11 @@ return {
 				astro = { "prettier" },
 				sh = { "shellcheck" },
 				json = { "prettier" },
+				svg = { "prettier" },
+				html = { "prettier" },
+				css = { "prettier" },
+				scss = { "prettier" },
+				python = { "ruff", "ruff_format" },
 			},
 		})
 	end,
